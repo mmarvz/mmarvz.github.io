@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>𝑀|𝒮ʸˢᵗᵉᵐ 𝒮ᵒˡᵘᵗⁱᵒⁿˢ</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.21/vanta.waves.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        let colors = [
+            0x0b467d,
+            0x4a008c,
+            0x83008c,
+            0x8c0008,
+            0x8c4100,
+            0x8c8b00,
+            0x8c39
+        ];
+
+        let colorIndex = 0;
+
+        const interpolateColor = (color1, color2, factor) => {
+            let result = color1.map((c, i) => Math.round(c + factor * (color2[i] - c)));
+            return `0x${result.map(c => c.toString(16).padStart(2, '0')).join('')}`;
+        };
+
+        const hexToRgb = (hex) => {
+            let bigint = parseInt(hex, 16);
+            return [bigint >> 16 & 255, bigint >> 8 & 255, bigint & 255];
+        };
+
+        const transitionColor = () => {
+            let currentColor = hexToRgb(colors[colorIndex].toString(16).padStart(6, '0'));
+            let nextColorIndex = (colorIndex + 1) % colors.length;
+            let nextColor = hexToRgb(colors[nextColorIndex].toString(16).padStart(6, '0'));
+            let steps = 100;
+            let step = 0;
+
+            const updateColor = () => {
+                let factor = step / steps;
+                let interpolatedColor = interpolateColor(currentColor, nextColor, factor);
+                vantaEffect.setOptions({
+                    color: parseInt(interpolatedColor, 16)
+                });
+                step++;
+                if (step <= steps) {
+                    requestAnimationFrame(updateColor);
+                } else {
+                    colorIndex = nextColorIndex;
+                }
+            };
+
+            updateColor();
+        };
+
+        let vantaEffect = VANTA.WAVES({
+            el: "body",
+            color: colors[colorIndex],
+            mouseControls: false,
+            touchControls: false,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            waveSpeed: 0.45,
+            zoom: 1
+        });
+
+        setInterval(transitionColor, 4000); // Change color every 4 seconds
+    </script>
+</body>
+</html>

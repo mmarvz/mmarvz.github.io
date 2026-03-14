@@ -1,0 +1,354 @@
+
+@font-face {
+    font-family: 'Varela Round';
+    src: url('tools/fonts/VarelaRound-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    font-family: "Varela round", sans-serif;
+    overflow: hidden;
+    color: #ffffff;
+    background-color: #0B467D;
+  text-shadow: 1px 1px #C4C4C4;
+}
+#background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 0;
+}
+
+.buttoncontainer {
+    font-family: "Varela round", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    position: fixed;
+    top: 293px;
+    left: -5px;
+    z-index: 1001;
+    background: rgba(0,0,0,0);
+}
+.adiframe {
+  display: flex;
+  position: fixed;
+  z-index: 1001;
+  top: 500px;
+  left: 0px;
+  bottom: 0;
+  max-height: 100vh;
+  max-width: 100vw;
+}
+.buttoncontainer1 {
+    font-family: "Varela round", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    position: fixed;
+    top: 345px;
+    left: -4px;
+    z-index: 1001;
+    background: rgba(0,0,0,0);
+}
+
+.button {
+    font-family: "Varela round", sans-serif;
+    background: rgba(0,0,0,0);
+    width:243px;
+    height: 45px;
+    border: 0px solid #ccc;
+    padding-left: 37px;
+    border-radius: 0px 40px 40px 0px;
+    text-align: left;
+    cursor: pointer;
+}
+.button.active {
+    font-family: "Varela round", sans-serif;
+    background-color: #B3D6F7;
+    color: #0C4D8E;
+    border-radius: 0px 40px 40px 0px;
+    border: 0px solid #ccc;
+    width:243px;
+    height: 45px;
+    padding-left: 37px;
+    font-weight: bold;
+    text-align: left;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #E9F3FB;
+    transition: background-color 100ms linear;
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.dark-mode .text-element {
+  background-color: #000;
+  color: #fff;
+}
+
+.dark-mode .button:hover {
+  background-color: #4C2908 !important;
+  color: #fff !important;
+}
+
+
+.credits {
+    font-family: "Varela round", sans-serif;
+    font-size: 12px;
+    text-align: left;
+    margin-left: 10px;
+    z-index: 1001;
+    position: fixed;
+    height: 4.5%;
+    bottom: 0;
+    padding: 0;
+}
+#date-time {
+    font-size: 12px;
+    margin-right: 60px;
+    bottom: 10px;
+    position: absolute;
+    right: 10px;
+    z-index: 1001;
+    padding: 0;
+}
+#calendar {
+    font-size: 12px;
+    display: none;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    color: #000000;
+    background-color: #F5F5F5;
+    border: 0px solid #ccc;
+    padding: 10px;
+    z-index: 1001;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+#calendar table {
+    width: 100%;
+    border-collapse: collapse;
+}
+#calendar th, #calendar td {
+    padding: 5px;
+    text-align: center;
+    border: 0px solid #ddd;
+}
+#calendar .today {
+    background-color: #d0d0d0;
+    font-weight: bold;
+}
+#calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+#calendar-header button {
+    background-color: #F5F5F5;
+    border: 0px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+
+ iframe {
+    border: none;
+    height: 100vh;
+    width: 100vw;
+}
+
+.frame-container {
+    height: 94%;
+    display: flex;
+
+}
+
+.frame-left {
+    width: 80%;
+    height: 95%;
+    position: relative;
+    z-index: 1000;
+}
+
+.frame-right {
+    width: 20%;
+    height: 95%;
+    position: relative;
+    z-index: 1000;
+}
+.tabs-container,
+.tabs-container1 {
+    display: flex;
+    margin: 0px;
+    padding: 0px;
+    height: 30px;
+    z-index: 1000;
+    }
+
+.tabs-container1 {
+    margin-left: 80%;
+    position: fixed; 
+    z-index: 1000;
+    }
+
+    .tab,
+    .tab1 {
+    padding: 5px 5px;
+    margin-right: 0px;
+    border: 0px solid #ccc;
+    z-index: 1000;
+    cursor: pointer;
+    text-shadow: 1px 1px #C4C4C4;
+   
+    }
+
+    .tab.active,
+    .tab1.active {
+    font-weight: bold;
+    color: #434343;
+    z-index: 1000;
+    cursor: pointer;
+    text-shadow: 2px 2px #C4C4C4;
+    background-color: #F5F5F5;
+    }
+
+
+    .frame-left iframe,
+    .frame-right iframe {
+    display: none;
+    z-index: 1000;
+    }
+
+    .frame-left iframe.active,
+    .frame-right iframe.active {
+    display: block;
+    z-index: 1000;
+    }
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1002;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    backdrop-filter: blur(1px);
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.modal-content {
+    justify-content: center;
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color: white;
+    margin-top:200px;
+}
+
+.modal-content img {
+    max-width: 800px;
+    height: auto;
+}
+.right-content {
+    justify-content: right;
+    position: relative;
+    text-align: left;
+    padding: 0px;
+    font-size: 11px;
+    z-index: 3000;
+    margin-top:30%;
+    margin-left:86%;
+    height: 300px;
+    overflow:auto;
+    width: 230px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+#timer, #currentTime {
+    font-size: 30px;
+    margin-top: 20px;
+}
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            gap: 10px;
+            color: black;
+            font-size: 11px;
+        }
+        .grid-item {
+            border: 1px solid #ccc;
+            text-align: center;
+            padding: 2px;
+            background-color: white;
+
+        }
+        .grid-item img {
+            max-width: 100%;
+            height: auto;
+        }
+        .selected {
+            border: 2px solid blue;
+        }
+
+.switch input {
+  position: absolute;
+  opacity: 0;
+    cursor: pointer;
+}
+
+
+.switch {
+  display: inline-block;
+  font-size: 20px; /* 1 */
+  height: 0.75em;
+  width: 1.5em;
+  background: #BDB9A6;
+  border-radius: 1em;
+}
+
+.switch div {
+  height: 0.75em;
+  width: 0.75em;
+  border-radius: 1em;
+  background: #FFF;
+  box-shadow: 0 0.1em 0.3em rgba(0,0,0,0.3);
+  -webkit-transition: all 300ms;
+     -moz-transition: all 300ms;
+          transition: all 300ms;
+}
+
+.switch input:checked + div {
+  -webkit-transform: translate3d(100%, 0, 0);
+     -moz-transform: translate3d(100%, 0, 0);
+          transform: translate3d(100%, 0, 0);
+    cursor: pointer;
+}
+
+        .toggle-container {
+            margin: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .toggle-label {
+            margin-right: 10px;
+        }

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>𝑀|𝒮ʸˢᵗᵉᵐ 𝒮ᵒˡᵘᵗⁱᵒⁿˢ</title>
+    <style>
+@font-face {
+    font-family: 'Varela Round';
+    src: url('fonts/VarelaRound-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+        body {
+            font-family: "Varela round", sans-serif;
+            margin: 5px;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+            overflow: hidden;
+            background-color: #F5F5F5;
+        }
+        .container {
+            font-family: "Varela round", sans-serif;
+            max-width: 100%;
+            max-height: 100%;
+            margin-right: 5px;
+            position: relative;
+            height: 100%;
+        }
+        textarea {
+            font-family: "Varela round", sans-serif;
+            width: 100%;
+            height: calc(100% - 30px);
+            margin-top: 5px;
+            position: relative;
+            border: none;
+        }
+        select {
+            font-family: "Varela round", sans-serif;
+            width: 100%;
+            height: 30px;
+            margin-top: 0;
+            position: relative;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 0px;
+            max-height: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <select id="dropdown">
+            <option value="">Remarks</option>
+            <option value="
+
+Kindly provide the valid ID of  . Thank you.">🪪No Valid ID</option>
+            <option value="
+
+Kindly provide another valid ID of  . Thank you.">🪪Other Valid ID</option>
+            <option value="
+
+Kindly provide the clearer/uncovered copy of valid ID of  . Thank you.">🪪Blurred/Covered Valid ID</option>
+            <option value="
+
+Kindly provide the updated valid ID of  as the valid ID presented is already expired. Thank you.">🪪Expired Valid ID</option>
+            <option value="
+
+Kindly provide the valid ID indicating the full name of  . Thank you.">🪪Incomplete Name on ID</option>
+            <option value="
+
+Kindly provide the valid ID of  with the same name indicated. Otherwise, please input the name based on the ID provided. Thank you.">🪪Name and ID Mismatch</option>
+            <option value="
+
+Kindly indicate the correct name of  . Thank you.">💭Wrong Name Input</option>
+            <option value="
+
+Kindly indicate the correct surname of  . Thank you.">💭Wrong Surname Input</option>
+            <option value="
+
+Kindly indicate the full name of  . Thank you.">💭Incomplete Name</option>
+            <option value="
+
+Kindly send us an email confirming the height of - .
+Bahamas / Boracay / Maldives :
+stl-bahamas.boracay.maldives@azureresidences.com.ph
+Rio / Santorini / St.Tropez :
+stl-rio.santorini.sttropez@azureresidences.com.ph
+Maui / Miami / Positano :
+stl-maui.miami.positano@azureresidences.com.ph">🚼Confirm 3FT</option>
+            <option value="
+
+For minor guests below 1 year old, kindly indicate the age next to its name.">🚼Below 1 Year Old</option>
+            <option value="
+
+Kindly provide another valid ID with date of birth or birth certificate of your oldest guest. For verification purposes only. Thank you.">🚼Check Oldest Guest</option>
+            <option value="
+
+Please be informed that minor guests should be accompanied by at least one adult. If this is a Non-STL, kindly send us an email confirmation.
+Bahamas / Boracay / Maldives :
+stl-bahamas.boracay.maldives@azureresidences.com.ph
+Rio / Santorini / St.Tropez :
+stl-rio.santorini.sttropez@azureresidences.com.ph
+Maui / Miami / Positano :
+stl-maui.miami.positano@azureresidences.com.ph">🚼All Minor Guests</option>
+            <option value="
+Kindly remove the ID attached on under -'s name.
+">🚼Minor; Remove ID</option>
+            <option value="
+
+Kindly contact your tower's Resident Relations Officer. Thank you.">⚠️Contact RRO</option>
+            <option value="
+
+Upon checking, you have balance at the Accounting Department that needs to be settled first. Kindly coordinate with the unit owner or to the Accounting Department. Thank you.">⚠️Delinquent</option>
+            <option value="
+
+You have exceeded the prescribed number of guests/occupants (4 pax only for 1 bed room unit). Only one child (3ft. and below) is allowed beyond the number of prescribed occupants regardless of the size of the unit. Thank you.
+">⚠️Guest Exceed 1BR</option>
+            <option value="
+You have exceeded the prescribed number of guests/occupants (6 pax only for 2 bed room unit). Only one child (3ft. and below) is allowed beyond the number of prescribed occupants regardless of the size of the unit. Thank you.
+">⚠️Guest Exceed 2BR</option>
+            <option value="Please ensure to include the Firstname and the Lastname of the guests. Also, refrain from using nicknames/aliases.">ADD: Nicknames/Aliases</option>
+            <option value="Please be advised that if your booking is confirmed and the child exceeds the height requirement upon verification of the concierge staff/security personnel during their check-in, the booking will be voided automatically.">ADD: 3FT Exceed</option>
+        </select>
+        <textarea id="notepad" placeholder="..."></textarea>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const notepad = document.getElementById('notepad');
+            const dropdown = document.getElementById('dropdown');
+
+            if (localStorage.getItem('notepadContent')) {
+                notepad.value = localStorage.getItem('notepadContent');
+            }
+
+            notepad.addEventListener('input', function() {
+                localStorage.setItem('notepadContent', notepad.value);
+                scrollToBottom(notepad);
+            });
+
+            dropdown.addEventListener('change', function() {
+                if (dropdown.value) {
+                    notepad.value += dropdown.value + '\n';
+                    localStorage.setItem('notepadContent', notepad.value);
+                    scrollToBottom(notepad);
+                    dropdown.selectedIndex = 0;
+                }
+            });
+
+            function scrollToBottom(element) {
+                element.scrollTop = element.scrollHeight;
+            }
+
+            scrollToBottom(notepad);
+        });
+    </script>
+</body>
+</html>

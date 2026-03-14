@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>★𝑀|𝒮ʸˢᵗᵉᵐ 𝒮ᵒˡᵘᵗⁱᵒⁿˢ</title>
+    <style>
+        body {
+            font-family: courier, sans-serif;
+            text-align: center;
+            margin: 5px;
+            background-color: black;
+            color: #ffffff;
+        }
+        #results {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 0px;
+            max-width: 90vw;
+            margin: 5px;
+            overflow-y: auto;
+            height: 70vh;
+        }
+        textarea {
+            width: 90%;
+
+        }
+    </style>
+</head>
+<body>
+    <textarea id="url" placeholder="Enter URL(s) to ping" rows="1" cols="30">https://azuresouth-pms.com/</textarea>
+    <br>
+    <button id="pingButton">Start Ping</button>
+    <button id="stopButton" disabled>Stop Ping</button>
+    <div id="results"><---ping---></div>
+
+    <script>
+        let pingInterval;
+
+        document.getElementById('pingButton').addEventListener('click', () => {
+            const url = document.getElementById('url').value.trim();
+            if (!url) {
+                alert('Please enter a valid URL.');
+                return;
+            }
+
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+
+            document.getElementById('pingButton').disabled = true;
+            document.getElementById('stopButton').disabled = false;
+
+            pingInterval = setInterval(async () => {
+                const startTime = performance.now();
+                const resultItem = document.createElement('div');
+
+                try {
+                    await fetch(url, { method: 'HEAD', mode: 'no-cors' });
+                    const endTime = performance.now();
+                    const latency = Math.round(endTime - startTime);
+                    resultItem.textContent = `Ping to ${url}: ${latency}ms`;
+                } catch (error) {
+                    resultItem.textContent = `Ping to ${url} failed: ${error.message}`;
+                }
+
+                resultsDiv.prepend(resultItem);
+            }, 1000);
+        });
+
+        document.getElementById('stopButton').addEventListener('click', () => {
+            clearInterval(pingInterval);
+            document.getElementById('pingButton').disabled = false;
+            document.getElementById('stopButton').disabled = true;
+        });
+    </script>
+</body>
+</html>

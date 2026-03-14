@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>𝑀|𝒮ʸˢᵗᵉᵐ 𝒮ᵒˡᵘᵗⁱᵒⁿˢ</title>
+    <style>
+@font-face {
+    font-family: 'Varela Round';
+    src: url('fonts/VarelaRound-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+        body {
+            font-family: "Varela Round", sans-serif;
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #F5F5F5;
+            overflow: hidden;
+        }
+        .container {
+            margin-left: 5px;
+            margin-top: 5px;
+            height: 30px;
+            background-color: #FFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #calculatorType {
+            width: 100%;
+            height: 100%;
+        }
+        .calculator, .converter, .generator {
+            display: none;
+            margin: 5px;
+        }
+.generator iframe {
+    display: none;
+}
+.generator[style*="display: block"] iframe {
+    display: block;
+}
+        .result {
+            margin-top: -20px;
+            margin-left: 80px;
+            font-size: 1em;
+        }
+        button {
+            font-family: "Varela round", sans-serif;
+            padding: 5px;
+            margin-top: 5px;
+            background-color: #d0d0d0;
+            color: black;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #B4B4B4;
+            font-weight: bold;
+            color: white;
+        }
+        select, input {
+            font-family: "Varela round", sans-serif;
+            padding: 2px;
+            margin-top: 5px;
+            width: 100%;
+            border: 0px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+<select id="calculatorType" onchange="showCalculator()">
+    <option value="BibleVerse" selected>Toolbox & FEIs</option>
+    <option value="heightConverter">Height Converter</option>
+    <option value="ageCalculator">Age Calculator</option>
+    <option value="dateCalculator">Days Calculator</option>
+    <option value="qrcodegen">QR Code Generator</option>
+    <option value="latency">APMS Latency Check</option>
+    <option value="fei">Frequently Encountered Issues</option>
+    <option value="VIP"></option>
+</select>
+
+    </div>
+<div id="BibleVerse" class="generator active" style="display: block;">
+    <iframe src="./verse.htm" style="height: 85vh; width: 100vw; z-index: 10;position: absolute; z-index: 1;"></iframe>
+</div>
+
+        <div id="heightConverter" class="converter">
+            <input type="number" id="lengthInput" placeholder="Enter value">
+            <select id="lengthUnit">
+                <option value="cm">Centimeters</option>
+                <option value="meters">Meters</option>
+                <option value="inches">Inches</option>
+                <option value="feet">Feet</option>
+            </select>
+            <button onclick="convertLength()">Convert</button>
+            <div class="result" id="lengthResult"></div>
+        </div>
+
+        <div id="ageCalculator" class="calculator">
+            <input type="date" id="dob">
+            <button onclick="calculateAge()">Calculate</button>
+            <div class="result" id="ageResult"></div>
+        </div>
+
+        <div id="dateCalculator" class="calculator">
+            <input type="date" id="startDate">
+            <input type="date" id="endDate">
+            <button onclick="calculateDate()">Calculate</button>
+            <div class="result" id="dateResult"></div>
+        </div>
+        <div id="qrcodegen" class="generator">
+            <iframe src="./qrcodegen.htm" style=" height: 85vh; width: 100vw;"></iframe>
+        </div>
+        <div id="latency" class="generator">
+            <iframe src="./latency.htm" style=" height: 85vh; width: 100vw;"></iframe>
+        </div>
+        <div id="fei" class="generator">
+            <iframe src="./fei.htm" style=" height: 85vh; width: 100vw;"></iframe>
+        </div>
+
+
+
+
+    <script>
+function showCalculator() {
+    const calculatorType = document.getElementById('calculatorType').value;
+    const calculators = document.querySelectorAll('.calculator, .converter, .generator');
+
+    calculators.forEach(calc => {
+        calc.style.display = 'none'; // Hide all calculators
+        const iframe = calc.querySelector('iframe');
+        if (iframe) {
+            iframe.style.display = 'none'; // Ensure iframe is hidden
+        }
+    });
+
+    if (calculatorType) {
+        const selectedDiv = document.getElementById(calculatorType);
+        if (selectedDiv) {
+            selectedDiv.style.display = 'block'; // Show selected calculator
+            const iframe = selectedDiv.querySelector('iframe');
+            if (iframe) {
+                iframe.style.display = 'block'; // Ensure iframe is visible if needed
+            }
+        }
+    }
+}
+
+
+
+function convertLength() {
+    const value = parseFloat(document.getElementById('lengthInput').value);
+    const unit = document.getElementById('lengthUnit').value;
+    let result;
+    if (unit === 'cm') {
+        result = `${(value / 2.54).toFixed(2)} in, ${(value / 100).toFixed(2)} m, or ${(value / 30.48).toFixed(2)} ft`;
+    } else if (unit === 'inches') {
+        result = `${(value * 2.54).toFixed(2)} cm, ${(value / 39.3701).toFixed(2)} m, or ${(value / 12).toFixed(2)} ft`;
+    } else if (unit === 'meters') {
+        result = `${(value * 100).toFixed(2)} cm, ${(value * 39.3701).toFixed(2)} in, or ${(value * 3.28084).toFixed(2)} ft`;
+    } else if (unit === 'feet') {
+        result = `${(value * 30.48).toFixed(2)} cm, ${(value * 12).toFixed(2)} in, or ${(value / 3.28084).toFixed(2)} m`;
+    }
+    document.getElementById('lengthResult').textContent = result;
+}
+
+
+        function calculateAge() {
+            const dob = document.getElementById('dob').value;
+            if (!dob) {
+                alert('Please enter your date of birth');
+                return;
+            }
+
+            const dobDate = new Date(dob);
+            const today = new Date();
+            let age = today.getFullYear() - dobDate.getFullYear();
+            const monthDiff = today.getMonth() - dobDate.getMonth();
+
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dobDate.getDate())) {
+                age--;
+            }
+
+            document.getElementById('ageResult').textContent = `${age} yrs old`;
+        }
+
+        function calculateDate() {
+            const startDate = new Date(document.getElementById('startDate').value);
+            const endDate = new Date(document.getElementById('endDate').value);
+            if (!startDate || !endDate) {
+                alert('Please enter both dates');
+                return;
+            }
+            const diffTime = Math.abs(endDate - startDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            document.getElementById('dateResult').textContent = `${diffDays} days`;
+        }
+    </script>
+</body>
+</html>
